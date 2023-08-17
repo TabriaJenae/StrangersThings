@@ -1,9 +1,14 @@
 # Strangers Things
 
-Laura Ngounou
-Tabria Williams
-Umar Khalid
-Jacqui Farrow
-Austin Starling
+Laura Ngounou  
+
+Tabria Williams  
+
+Umar Khalid  
+
+Jacqui Farrow  
+
+Austin Starling  
+
 
 
