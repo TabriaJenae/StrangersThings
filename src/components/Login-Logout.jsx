@@ -1,16 +1,18 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
-
+const COHORT_NAME = '2305-FTB-ET-WEB-PT'
+const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
 
 
 export default function Loginuser() {
 const [username, setusername] = useState("");
 const [password, setpassword] = useState("");
 
-const [error, seterror] = useState(null);
+
 const [usernameerror, setusernameerror] = useState(null);
 const [passworderror, setpassworderror] = useState(null);
+
 
 const login = async (event) => {
  event.preventDefault();
@@ -45,21 +47,40 @@ const login = async (event) => {
           }
         })
       });
-       result = await response.json();
+       const result = await response.json();
       console.log(result);
       return result
-    } catch (erroe) {
-      seterror.error(error.message);
+    } catch (err) {
+      console.log(err);
     }
+
+    // my data after logging in 
+
+const myData = async () => {
+
+  try {
+      const response = await fetch(`${BASE_URL}/users/me`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${TOKEN_STRING_HERE}`
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+}
     //attempt at sessionstorage
-    if(result.name) {
-        sessionStorage.setItem('user',JSON.stringify(result));
-        Navigate("./")
-    }
-    else{
-        alert("Please enter correct details")
-    }
-  }
+    //if(result.name) {
+     //   sessionStorage.setItem('user',JSON.stringify(result));
+     //   Navigate("./")
+    //}
+    //else{
+    //    alert("Please enter correct details")
+    //}
+}
 
 //create form 
     return (
@@ -103,31 +124,9 @@ const login = async (event) => {
 }
 Loginuser 
 
+//if login user successful, store the session and populate logout button 
 
 
-//MY DATA after logging in
-
-//const myData = async () => {
-
-  //  try {
-    //  const response = await fetch(`${BASE_URL}/users/me`, {
-      //  headers: {
-        //  'Content-Type': 'application/json',
-          //'Authorization': `Bearer ${TOKEN_STRING_HERE}`
-       // },
-     /// });
-      //const result = await response.json();
-      //console.log(result);
-     // return result
-   // } catch (err) {
-     // console.error(err);
-    //}
-
-//return myData
-
-//  }
-//myData
-
-
+//log out button 
 
 

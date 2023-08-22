@@ -1,6 +1,11 @@
 import React, {useState} from "react";
 
-export default function Register ({token}) {
+const COHORT_NAME = '2305-FTB-ET-WEB-PT'
+const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
+
+
+
+export default function Register () {
 
     const [createuser, setcreateuser] = useState("");
     const [createpassword, setcreatepassword] = useState("");
@@ -11,7 +16,7 @@ export default function Register ({token}) {
     const registerUser = async (event) => {
         event.preventDefault();
 
-        if (username.length < 6) {
+        if (createuser.length < 6) {
             setcreateusernameerror("Username must be at least 6 characters in length");
             return;
           } else {
@@ -87,3 +92,4 @@ return(
  );
 }
 Register;
+
