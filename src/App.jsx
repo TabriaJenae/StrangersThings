@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import { Route, Routes } from "react-router-dom";
-import {PostsView, Unauthenticated} from "./components/PostAuthentication"
-import {PostsView, UpgradedwithAuthentication} from  "./components/PostUnauthenticated"
-import {RegisterLoginLogoutAuthentication} from "./components/Login-Logout"
+//import {PostsView, Unauthenticated} from "./components/PostAuthentication"
+//import {PostsView, UpgradedwithAuthentication} from  "./components/PostUnauthenticated"
+import Loginuser from "./components/Login-Logout"
+import Register from "./components/Register"
 import AllPosts from "./components/PostUnauthenticated"
+
 
 
 function App() {
@@ -13,7 +15,10 @@ function App() {
   return (
     <>
       <div>
-        <AllPosts />
+      <AllPosts />
+      <Loginuser />
+      <Register />
+        
       </div>
     </>
   )

@@ -40,7 +40,7 @@ export default function AllPosts() {
         )
 
 }
-
+AllPosts
 
 
 // const response = await fetch(`${BASE_URL}/posts`, {
