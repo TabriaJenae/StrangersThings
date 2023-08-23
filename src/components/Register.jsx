@@ -1,3 +1,4 @@
+
 import React, {useState} from "react";
 
 const COHORT_NAME = '2305-FTB-ET-WEB-PT'
@@ -92,4 +93,5 @@ return(
  );
 }
 Register;
+
 
