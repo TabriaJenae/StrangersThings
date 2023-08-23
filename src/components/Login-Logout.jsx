@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import Users from "./usersme";
 import { useNavigate } from "react-router-dom";
 
 const COHORT_NAME = '2305-FTB-ET-WEB-PT'
@@ -15,7 +16,8 @@ const [passworderror, setpassworderror] = useState(null);
 
 
 const login = async (event) => {
- event.preventDefault();
+    event.preventDefault();
+
 
     //form validation: username
     if (username.length < 6) {
@@ -27,7 +29,7 @@ const login = async (event) => {
       
       // form validation: password
       if (password.length < 8) {
-        setpassworderror("Password must be at least 8 characters in length");
+        setpassworderror("Password must be at least 6 characters in length");
         return;
       } else {
         setpassworderror(null);
@@ -42,36 +44,19 @@ const login = async (event) => {
         },
         body: JSON.stringify({
           user: {
-            username: 'superman27',
-            password: 'krypt0n0rbust'
+            username: username,
+            password: password
           }
         })
       });
        const result = await response.json();
-      console.log(result);
+      console.log(result, username, password);
       return result
     } catch (err) {
       console.log(err);
     }
 
     // my data after logging in 
-
-const myData = async () => {
-
-  try {
-      const response = await fetch(`${BASE_URL}/users/me`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${TOKEN_STRING_HERE}`
-        },
-      });
-      const result = await response.json();
-      console.log(result);
-      return result
-    } catch (err) {
-      console.error(err);
-    }
-}
     //attempt at sessionstorage
     //if(result.name) {
      //   sessionStorage.setItem('user',JSON.stringify(result));
@@ -116,6 +101,11 @@ const myData = async () => {
          <button type='Submit' style=
       {{width: "80px", height: "37px", padding: "10px", 
       fontSize:"15px"}}
+
+     onClick={() => {
+     
+     }}
+
       >Login</button>
 
  </form>

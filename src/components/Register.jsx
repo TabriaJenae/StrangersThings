@@ -40,8 +40,8 @@ export default function Register () {
           },
           body: JSON.stringify({
             user: {
-              username: 'superman27',
-              password: 'krypt0n0rbust'
+              username: createuser,
+              password: createpassword
             }
           })
         });

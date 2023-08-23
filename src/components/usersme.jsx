@@ -1,11 +1,19 @@
 import React, {useState, useEffect} from "react";
 
+
+
 const COHORT_NAME = '2305-FTB-ET-WEB-PT'
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
 
-export default function Users() {
+export default function Users({user, setuser}) {
 
-    const myData = async () => {
+ 
+
+    const [successMessage, setSuccessMessage] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+    const myData = async (TOKEN_STRING_HERE) => {
 
         try {
           const response = await fetch(`${BASE_URL}/users/me`, {
@@ -15,17 +23,25 @@ export default function Users() {
             },
           });
           const result = await response.json();
-          console.log(result);
+          setuser(result.user)
+          console.log(result.user);
           return result
         } catch (err) {
           console.error(err);
         }
+       
       }
+      myData;
+    }, []);
 
-      
-    return(
+    return (
         <>
-
+      
+        <h2>Welcome
+           {user}
+        </h2>
+ 
         </>
-    );
+   );
 }
+Users
