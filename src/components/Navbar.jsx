@@ -1,22 +1,40 @@
 import React from "react";
-import {link}  from 'react-router-dom'
+import { Link, useNavigate }  from 'react-router-dom'
 import '../App.css';
 
 
-const Navbar =()=> {
+const Navbar=()=> {
+    const auth = sessionStorage.getItem('user');
+    const navigate =useNavigate();
+    const logout =()=>{
+        sessionStorage.clear();
+        navigate('/Register')
+    }
     return (
         <div>
-            <ul className="navbar">
+            
+        
+      
+        
+                <ul className="navbar">
                 <li>
-                    <link to={'/'}>Home</link>
+                <Link to={'/'}>Home</Link>
                 </li>
                 <li>
-                <link to={'/login'}>Login</link>
+                <Link to={'/posts'}>Posts</Link>
+                </li>
+                <li><Link onClick={logout} to='/logout'>Logout </Link> 
                 </li>
                 <li>
-                <link to={'/Register'}>Home</link>
+                <Link to={'/login'}>Login</Link>
                 </li>
-            </ul>
+                <li>
+                <Link to={'/Register'}>Register</Link>
+                </li>
+             </ul>
+
         </div>
     )
 }
+
+export default Navbar;

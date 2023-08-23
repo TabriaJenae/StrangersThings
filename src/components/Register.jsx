@@ -1,5 +1,6 @@
 
 import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 const COHORT_NAME = '2305-FTB-ET-WEB-PT'
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
@@ -8,28 +9,31 @@ const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
 
 export default function Register () {
 
-    const [createuser, setcreateuser] = useState("");
-    const [createpassword, setcreatepassword] = useState("");
+    const [username, setusername] = useState("");
+    const [password, setpassword] = useState("");
 
-    const [createusernameerror, setcreateusernameerror] = useState(null);
-    const [createpassworderror, setcreatepassworderror] = useState(null);
+    const [usernameerror, setusernameerror] = useState(null);
+    const [passworderror, setpassworderror] = useState(null);
+
+    const navigate = useNavigate();
+    
 
     const registerUser = async (event) => {
         event.preventDefault();
 
-        if (createuser.length < 6) {
-            setcreateusernameerror("Username must be at least 6 characters in length");
+        if (username.length < 6) {
+            setusernameerror("Username must be at least 6 characters in length");
             return;
           } else {
-            setcreateusernameerror(null);
+            setusernameerror(null);
           }
           
           // form validation: password
-          if (createpassword.length < 8) {
-            setcreatepassworderror("Password must be at least 8 characters in length");
+          if (password.length < 8) {
+            setpassworderror("Password must be at least 8 characters in length");
             return;
           } else {
-            setcreatepassworderror(null);
+            setpassworderror(null);
           }
 
     try {
@@ -41,54 +45,66 @@ export default function Register () {
           },
           body: JSON.stringify({
             user: {
-              username: createuser,
-              password: createpassword
+              username: username,
+              password: password
             }
-          })
-        });
+          })})
+        ;
         const result = await response.json();
         console.log(result)
+            navigate('/login');
+    
         return result
       } catch (err) {
         console.error(err);
-      }
+        
+      }    
 };
+
 return(
     <>
+    <div>
 <h2>Don't have an account? Sign Up</h2>
- <form method="POST"
+ <form
+ method="POST"
  onSubmit={registerUser} 
         onClick={() => {
-            setcreateuser(createuser)
+            setusername(username)
         }}>
 <label>
     Create Username:{""}
     <input 
         placeholder='Create Username'
-        value = {createuser}
+        value = {username}
+        
          onChange={(e)=> 
-        setcreateuser(e.target.value)} />
+        setusername(e.target.value)} />
 </label>
-{createusernameerror && <p style={{ color: "red"}}>{createusernameerror}</p>} 
+{usernameerror && <p style={{ color: "red"}}>{usernameerror}</p>} 
 
 <label >
         Create Password:{""}
          <input 
          placeholder='Create Password'
          type='password'
-         value={createpassword}
+         value={password}
          onChange={(e)=> 
-         setcreatepassword(e.target.value)}/>
+         setpassword(e.target.value)}/>
       </label>
     
-         {createpassworderror && <p style={{ color: "red"}}>{createpassworderror}</p>}
+         {passworderror && <p style={{ color: "red"}}>{passworderror}</p>}
 
-         <button type='Submit' style=
-      {{width: "80px", height: "37px", padding: "10px", 
-      fontSize:"15px"}}
-      >Submit</button>
-
+         <button  type='Submit' style=
+            {{width: "80px", height: "37px", padding: "10px", 
+            fontSize:"15px"}}
+           
+            //onClick={() => {
+             //   navigate('/login');
+            //}}
+            >Register</button>
+        
  </form>
+ </div>
          </>
  );
 }
