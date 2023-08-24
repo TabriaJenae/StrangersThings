@@ -10,6 +10,7 @@ export default function AllPosts() {
 
     const [posts, setPosts] = useState([]);
     const [searchParam, setSearchParam] = useState('');
+    const auth = sessionStorage.getItem('token');
 
 
     
@@ -61,9 +62,6 @@ export default function AllPosts() {
                 <h2>{post.price}</h2>
                 <h3>{post.location}</h3>
                 <h4>{post.willDeliver}</h4>
-                {/* {!auth || post.author.id === isLoggedIn.id ? null : (
-            <messageForm onMessageSubmit={handleMessageSubmit} isAuthenticated={isAuthenticated} />
-            )} */}
             </div> 
         ))}
 

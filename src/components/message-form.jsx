@@ -7,15 +7,16 @@
 
 import { useState } from "react";
 
-export default function messageForm({ onMessageSubmit, isAuthenticated }) {
+export default function MessageForm({ postId, onMessageSubmit }) {
     const [message, setMessage] = useState('');
+    const auth = sessionStorage.getItem('token');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (message.trim() === '') return
-        onMessageSubmit(message);
+        onMessageSubmit(postId, message);
         setMessage('');
-    }};
+    };
 
     return (
         <form onSubmit={handleSubmit}>
@@ -24,13 +25,12 @@ export default function messageForm({ onMessageSubmit, isAuthenticated }) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Enter your message"
-            disabled={!isAuthenticated}
          />
-         <button type="submit" disabled={!isAuthenticated}>Send Message</button>
+         <button type="submit">Send Message</button>
         </form>
   );
-
-messageForm;
+}
+MessageForm;
 
 
 // In allPosts section
