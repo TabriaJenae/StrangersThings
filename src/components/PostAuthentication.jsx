@@ -1,6 +1,6 @@
 //This is the Authenticated posts file with the function UserPosts. If a user clicks on "See Posts" nav link WHILE AUTHENTICATED/LOGGED IN, they will be routed to this version of the posts, which shows all posts WITH a nav link to Add a New Post AND, for the posts that the user made, buttons to delete the post or view messages related to a post.
 
-//If you are looking for the version of "See Posts" that users who are NOT authenticated/logged in will see, go to allposts.jsx and the function is called AllPosts. -Laura
+//If you are looking for the version of "See Posts" that users who are NOT authenticated/logged in will see, go to PostUnauthenticated.jsx and the function is called AllPosts. -Laura
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router";
