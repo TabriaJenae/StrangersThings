@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+//This is the general PostUnauthenticated file with the function AllPosts. If a user clicks on "See Posts" nav link while NOT being authenticated (logged in), they will be routed to this version of the posts, which shows all posts WITHOUT options to add or delete posts.
+
+//If you are looking for the version of "See Posts" that authenticated/logged in users will see, go to PostAuthentication.jsx and the function is called UserPosts. -Lauraimport { useEffect, useState } from 'react'
 
 const COHORT_NAME = '2305-FTB-ET-WEB-PT'
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
