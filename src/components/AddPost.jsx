@@ -1,3 +1,5 @@
+//When an authenticated/logged in user clicks on "Add New Post" nav link, they will be routed to this page. The code includes a form with the API-required fields to submit a new post and a button. The makePost function will run when the Submit New Post button is clicked, and upon successfully adding the post to the API, the user will be navigated to the See Posts page (the authenticated view).
+
 import React from "react";
 import { useState, useEffect, } from "react";
 import { useNavigate } from "react-router";
@@ -14,7 +16,8 @@ export default function AddPost () {
     const [willDeliver, setWillDeliver] = useState("");   
     const navigate = useNavigate();
 
-    const makePost = async (token) => {
+    const makePost = async () => {
+   
       const auth = sessionStorage.getItem('token');
       const response = await fetch(`${BASE_URL}/posts`, {
         method: "POST",

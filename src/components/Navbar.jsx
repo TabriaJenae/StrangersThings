@@ -7,7 +7,7 @@ const Navbar=()=> {
     const auth = sessionStorage.getItem('token');
     console.log(auth)
     const navigate = useNavigate();
-    const logout =()=> {
+    const logout = () => {
         sessionStorage.clear();
         navigate('/Register')
     }

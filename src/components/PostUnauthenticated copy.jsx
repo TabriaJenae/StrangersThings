@@ -1,3 +1,5 @@
+//THIS CODE IS NOT TIED TO ANYTHING. It is just a backup. It is the See Posts view for unauthenticated users but without any search function or message code.
+
 import { useEffect, useState } from 'react'
 
 const COHORT_NAME = '2305-FTB-ET-WEB-PT'
@@ -24,7 +26,7 @@ export default function AllPosts() {
         }, [])
 
         return (
-            <>
+            <>      
         {posts ? 
         posts.map((post) => { 
             return ( <div key={post._id}>

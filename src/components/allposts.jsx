@@ -1,3 +1,7 @@
+//This is the general allposts file with the function AllPosts. If a user clicks on "See Posts" nav link while NOT being authenticated (logged in), they will be routed to this version of the posts, which shows all posts WITHOUT options to add or delete posts.
+
+//If you are looking for the version of "See Posts" that authenticated/logged in users will see, go to PostAuthentication.jsx and the function is called UserPosts. -Laura
+
 import { useEffect, useState } from 'react'
 import AddPost from './AddPost';
 
