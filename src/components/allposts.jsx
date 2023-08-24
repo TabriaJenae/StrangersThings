@@ -31,20 +31,25 @@ export default function AllPosts() {
         
    
         return (
+        <div className="posts">
             <>
         {posts ? 
         posts.map((post) => { 
             return ( 
-            <div key={post._id}>
+        
+            <div key={post._id} className="post">
                 <h2>{post.title}</h2>
                 <h2>{post.description}</h2>
                 <h2>{post.price}</h2>
                 <h3>{post.location}</h3>
                 <h4>{post.willDeliver}</h4>
-            </div> 
+            
+            
+            </div>
         )
     }) : null}
      </>
+     </div>
      )
 } 
 

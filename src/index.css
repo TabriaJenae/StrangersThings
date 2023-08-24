@@ -14,6 +14,12 @@
   -webkit-text-size-adjust: 100%;
 }
 
+.post {
+  display: flex;
+  flex-direction: column;
+  
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -27,8 +33,11 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  background-color: rgb(175, 185, 204);
+  text-align: center;
   min-height: 100vh;
+  min-width: 320px;
+
 }
 
 h1 {
