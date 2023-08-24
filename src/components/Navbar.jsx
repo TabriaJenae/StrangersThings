@@ -7,7 +7,7 @@ const Navbar=()=> {
     const auth = sessionStorage.getItem('token');
     console.log(auth)
     const navigate = useNavigate();
-    const logout =()=> {
+    const logout = () => {
         sessionStorage.clear();
         navigate('/Register')
     }
@@ -17,11 +17,10 @@ const Navbar=()=> {
         <div>
         
                 <ul className="navbar">
-
-                <li><Link to={'/'}>Home</Link></li>
-                <li><Link to={'/posts'}>Posts</Link></li>
-                <li><Link to={'/login'}>Login</Link></li>
-                <li>{ auth ? <Link onClick={logout} to='/Register'>Logout</Link> : <Link to="/Register">Logout</Link>}</li>
+                <li>Welcome back!</li>
+                <li><Link to={'/posts'}>See Posts</Link></li>
+                <li><Link to={'/addpost'}>Add New Post</Link></li>
+                <li><Link onClick={logout} to='/Register'>Logout</Link></li> 
 
              </ul>
             
@@ -31,8 +30,10 @@ const Navbar=()=> {
             } else {
                 return (
                     <ul className="navbar">
+                    <li><Link to={'/'}>Home</Link></li>
                     <li><Link to={'/Register'}>Register</Link></li>
                     <li><Link to={'/login'}>Login</Link></li>
+                    <li><Link to={'/posts'}>Posts</Link></li>
                  </ul>
                 )
             }

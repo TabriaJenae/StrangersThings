@@ -8,13 +8,16 @@ import Register from "./components/Register";
 import AllPosts from "./components/PostUnauthenticated";
 import Navbar from './components/Navbar';
 import {Routes, Route} from "react-router-dom";
+import Home from './components/Home';
+import AddPost from './components/AddPost';
+import UserPosts from './components/PostAuthentication';
 
 
 
 
 function App() {
   const [user, setuser] = useState(null);
- 
+  const auth = sessionStorage.getItem('token');
   const [isloggedin, setisloggedin] = useState();
 
 
@@ -24,7 +27,9 @@ function App() {
       <Navbar />
       <Routes>
       
-      <Route path='/' element= {<AllPosts />} />
+      <Route path='/' element= {<Home />} />
+      <Route path='/posts' element= {auth ? <UserPosts /> : <AllPosts />} />
+      <Route path='/addpost' element={auth ? <AddPost /> : <Register />} />
       <Route path='/login' element= {<Loginuser />} />
       
       <Route path='/Register' element= {<Register />} />
@@ -33,14 +38,14 @@ function App() {
         
       </div>
 
-      {user ? (
+      {/* {user ? (
         <user
           user={user}
           setuser={setuser}
         />
       ) : (
         <Users setuser={setuser} />
-      )}
+      )} */}
 
     </>
   )

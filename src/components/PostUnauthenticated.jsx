@@ -10,6 +10,7 @@ export default function AllPosts() {
     const [searchParam, setSearchParam] = useState('');
 
 
+    
     useEffect(() => {
         async function fetchAllPosts() {
             try {
@@ -18,7 +19,7 @@ export default function AllPosts() {
                 console.log(result.data.posts);
                 setPosts(result.data.posts);
                 return result
-              } catch (error) {
+            } catch (error) {
                 console.error(error);
               }
             }
@@ -36,7 +37,7 @@ export default function AllPosts() {
 
         return (
             <>
-            <div className='all-posts-container'>
+      <div className='all-posts-container'>
       <h1>Strangers Things</h1>
       <div>
         <label className='search-bar'>
@@ -63,11 +64,24 @@ export default function AllPosts() {
             )} */}
             </div> 
         ))}
-            </>
+
+        {posts ? 
+            posts.map((post) => { 
+            return ( <div key={post._id}>
+                <h2>Title: {post.title}</h2>
+                <h2>Description: {post.description}</h2>
+                <h2>Price: {post.price}</h2>
+                <h3>Location: {post.location}</h3>
+                <h3>Delivery: {post.willDeliver}</h3>
+            </div> )
+        }) : null}
+            
+        </>
+       
         )
 
 }
-AllPosts
+
 
 
 // const response = await fetch(`${BASE_URL}/posts`, {
