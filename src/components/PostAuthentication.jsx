@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router";
+
 
 const COHORT_NAME = '2305-FTB-ET-WEB-PT'
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
@@ -7,9 +8,71 @@ const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
 
 export default function UserPosts() {
 
-const [username, setusername] = useState("");
-const [password, setpassword] = useState("");
+    const [posts, setPosts] = useState([]);
 
 
+
+    useEffect(() => {
+        async function fetchUserPosts() {
+            const auth = sessionStorage.getItem('token');
+
+            try {
+                const response = await fetch(`${BASE_URL}/posts`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${auth}`
+                      },
+                });
+                const result = await response.json();
+                console.log(result.data.posts);
+                setPosts(result.data.posts);
+                return result
+            } catch (error) {
+                console.error(error);
+              }
+            }
+            fetchUserPosts();
+        }, []);
+
+        async function deletePost (id) {
+            const auth = sessionStorage.getItem('token');
+            
+            try {
+              const response = await fetch(`${BASE_URL}/posts/${id}`, {
+                method: "DELETE",
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${auth}`
+                }
+              });
+              const result2 = await response.json();
+              if (result2) {window.location.reload()}
+              alert("Item removed.");
+            } catch (error) {
+        console.error(error);
+      }};
+
+
+
+        return (
+            <>
+        {posts ? 
+        posts.map((post) => { 
+            return ( <div key={post._id}>
+                <h2>Title: {post.title}</h2>
+                <h2>Description: {post.description}</h2>
+                <h2>Price: {post.price}</h2>
+                <h3>Location: {post.location}</h3>
+                <h4>Delivery: {post.willDeliver}</h4>
+                <li>{post.isAuthor ? <button onClick={()=>deletePost(post._id)}>Delete Post</button> : null}</li>
+                <li>{post.isAuthor ? <button onClick={()=>messageForm(post._id)}>See Messages About Item</button> : null}</li>
+
+            </div> )
+        }) : null}
+            </>
+        )
 
 }
+
+
+

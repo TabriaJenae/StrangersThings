@@ -4,4 +4,26 @@
   background-color:antiquewhite;
   padding:10px;
   list-style: none;
+  width: 100%;
+}
+
+.register {
+  margin: 30%;
+}
+
+.inputfield {
+  padding: 1rem;
+  display: block;
+  border: 1px solid navy;
+  width: 15rem;
+  margin: 1rem;
+}
+
+.actionbutton {
+  margin: 1rem;
+  width: 10rem;
+  padding: 1rem;
+  background-color: lightgray; 
+  border: 1px solid;
+  cursor: pointer;
 }
