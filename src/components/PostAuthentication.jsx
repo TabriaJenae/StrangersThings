@@ -4,6 +4,8 @@
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router";
+import MessageForm from './message-form';
+import { Link } from 'react-router-dom';
 
 
 const COHORT_NAME = '2305-FTB-ET-WEB-PT'
@@ -13,8 +15,12 @@ const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
 export default function UserPosts() {
 
     const [posts, setPosts] = useState([]);
-
-
+    const [searchParam, setSearchParam] = useState('');
+    const auth = sessionStorage.getItem('token');
+    const isAuthor = (post) => {
+      const authUserId = sessionStorage.getItem('userId');
+      return post.authorId === authUserId && !authUserId;
+  };
 
     useEffect(() => {
         async function fetchUserPosts() {
@@ -57,10 +63,86 @@ export default function UserPosts() {
         console.error(error);
       }};
 
+      async function handleMessageSubmit(postId, message) {
+        const auth = sessionStorage.getItem('token');
+    
+        try {
+            const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${auth}`
+                },
+                body: JSON.stringify({
+                    content: message
+                })
+            });
+    
+            const result = await response.json();
+            console.log(result);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async function seeMessages(postId) {
+      const auth = sessionStorage.getItem('token');
+  
+      try {
+          const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+              headers: {
+                  'Authorization': `Bearer ${auth}`
+              }
+          });
+  
+          const result = await response.json();
+          console.log(result.data.messages);
+      } catch (error) {
+          console.error(error);
+      }
+  }
+
+      function searchPosts() {
+        return searchParam
+   ? posts.filter((post) =>
+       post.title.toLowerCase().includes(searchParam.toLowerCase())
+     )
+   : posts;}
+
+   const filteredPosts = searchPosts();
+
 
 
         return (
             <>
+        <div className='all-posts-container'>
+      <h1>Strangers Things</h1>
+      <div>
+        <label className='search-bar'>
+          Search
+          <input
+            type="text"
+            placeholder=""
+            value={searchParam}
+            onChange={(e) => setSearchParam(e.target.value)}
+          />
+        </label>
+      </div>
+        </div>
+
+        {filteredPosts.map(post => (
+            <div key={post._id}>
+                <h2>{post.title}</h2>
+                <h2>{post.description}</h2>
+                <h2>{post.price}</h2>
+                <h3>{post.location}</h3>
+                <h4>{post.willDeliver}</h4>
+                {auth && !isAuthor(post) ? (
+            <MessageForm postId={post._id} onMessageSubmit={handleMessageSubmit} />
+            ) : null}
+            </div> 
+        ))}
+
         {posts ? 
         posts.map((post) => { 
             return ( <div key={post._id}>
@@ -71,6 +153,11 @@ export default function UserPosts() {
                 <h4>Delivery: {post.willDeliver}</h4>
                 <li>{post.isAuthor ? <button onClick={()=>deletePost(post._id)}>Delete Post</button> : null}</li>
                 <li>{post.isAuthor ? <button onClick={()=>messageForm(post._id)}>See Messages About Item</button> : null}</li>
+                {isAuthor(post) ? (
+                <div>
+                <button onClick={() => seeMessages(post._id)}>See Messages</button>
+                </div>
+                ) : null}
 
             </div> )
         }) : null}

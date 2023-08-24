@@ -31,6 +31,7 @@ function App() {
       <Route path='/posts' element= {auth ? <UserPosts /> : <AllPosts />} />
       <Route path='/addpost' element={auth ? <AddPost /> : <Register />} />
       <Route path='/login' element= {<Loginuser />} />
+      {/* <Route path="/author-messages/:postId" element={AuthorMessagesView} /> */}
       
       <Route path='/Register' element= {<Register />} />
 
