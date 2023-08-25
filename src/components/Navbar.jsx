@@ -4,7 +4,7 @@ import '../App.css';
 
 
 const Navbar=()=> {
-    const auth = sessionStorage.getItem('user');
+    let auth =  sessionStorage.getItem('token');
     const navigate =useNavigate();
     const logout =()=>{
         sessionStorage.clear();
@@ -13,7 +13,8 @@ const Navbar=()=> {
     return (
         <div>
             
-        
+            {
+                auth ? 
       
         
                 <ul className="navbar">
@@ -23,16 +24,19 @@ const Navbar=()=> {
                 <li>
                 <Link to={'/posts'}>Posts</Link>
                 </li>
-                <li><Link onClick={logout} to='/logout'>Logout </Link> 
-                </li>
                 <li>
-                <Link to={'/login'}>Login</Link>
+                <Link to='/profile'>Profile</Link>
                 </li>
-                <li>
-                <Link to={'/Register'}>Register</Link>
-                </li>
+                <li><Link onClick={logout} to='/Register'>Logout</Link></li> 
+                </ul>
+                :
+                <ul className="navbar">
+                
+                <li><Link to={'/login'}>Login</Link></li>
+                <li><Link to={'/Register'}>Register</Link></li>     
              </ul>
 
+            }
         </div>
     )
 }

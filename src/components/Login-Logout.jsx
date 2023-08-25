@@ -53,12 +53,7 @@ const login = async (event) => {
             password: password
           }
         })
-      
-     
-    
-     
-        //(localStorage.setItem("isloggedin", true)
-        //)
+   
       });
       
       

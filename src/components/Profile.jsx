@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-
+import messageForm from "./message-form";
 
 
 const COHORT_NAME = '2305-FTB-ET-WEB-PT'
@@ -7,10 +7,7 @@ const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
 
 export default function Users({ user, setuser}) {
 
- 
-
-    const [successMessage, setSuccessMessage] = useState(null);
-    const [error, setError] = useState(null);
+    let auth =  sessionStorage.getItem('token');
 
     useEffect(() => {
     const myData = async (event) => {
@@ -26,8 +23,8 @@ export default function Users({ user, setuser}) {
             },
           });
           const result = await response.json();
-          setuser(result.user)
-          console.log(result.user);
+          setuser(result)
+          console.log(result);
           return result
         } catch (err) {
           console.error(err);
@@ -39,7 +36,7 @@ export default function Users({ user, setuser}) {
 
     return (
         <>
-      
+      {messageForm}
      
  
         </>

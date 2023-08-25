@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './App.css'
 //import {PostsView, Unauthenticated} from "./components/PostAuthentication"
 //import {PostsView, UpgradedwithAuthentication} from  "./components/PostUnauthenticated"
-import Users from './components/usersme';
+import Users from './components/Profile';
 import Loginuser from "./components/Login-Logout";
 import Register from "./components/Register";
 import AllPosts from "./components/PostUnauthenticated";
@@ -17,6 +17,7 @@ function App() {
  
   const [isloggedin, setisloggedin] = useState();
 
+ 
 
   return (
     <>
@@ -26,7 +27,7 @@ function App() {
       
       <Route path='/' element= {<AllPosts />} />
       <Route path='/login' element= {<Loginuser />} />
-      
+      <Route path='/profile' element= {<Users />} />
       <Route path='/Register' element= {<Register />} />
 
       </Routes>
