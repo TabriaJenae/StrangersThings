@@ -11,6 +11,7 @@ import {Routes, Route} from "react-router-dom";
 import Home from './components/Home';
 import AddPost from './components/AddPost';
 import UserPosts from './components/PostAuthentication';
+import AuthorMessagesView from './components/AuthorMessagesView';
 
 
 
@@ -31,8 +32,7 @@ function App() {
       <Route path='/posts' element= {auth ? <UserPosts /> : <AllPosts />} />
       <Route path='/addpost' element={auth ? <AddPost /> : <Register />} />
       <Route path='/login' element= {<Loginuser />} />
-      {/* <Route path="/author-messages/:postId" element={AuthorMessagesView} /> */}
-      
+      <Route path="/author-messages/:postId" element={AuthorMessagesView} />
       <Route path='/Register' element= {<Register />} />
 
       </Routes>
