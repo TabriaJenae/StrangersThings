@@ -14,7 +14,6 @@ export default function AllPosts() {
     const [searchParam, setSearchParam] = useState('');
     const auth = sessionStorage.getItem('token');
 
-
     
     useEffect(() => {
         async function fetchAllPosts() {
@@ -43,10 +42,10 @@ export default function AllPosts() {
         return (
             <>
       <div className='all-posts-container'>
-      <h1>Strangers Things</h1>
-      <div>
+      <h1 className="brighttext" >Strangers Things</h1>
+      <div className="brighttext">
         <label className='search-bar'>
-          Search
+          Search for item name here: 
           <input
             type="text"
             placeholder=""
@@ -58,7 +57,7 @@ export default function AllPosts() {
         </div>
 
         {filteredPosts.map(post => (
-            <div key={post._id}>
+            <div key={post._id} className="item-card">
                 <h2>{post.title}</h2>
                 <h2>{post.description}</h2>
                 <h2>{post.price}</h2>
@@ -66,22 +65,8 @@ export default function AllPosts() {
                 <h4>{post.willDeliver}</h4>
             </div> 
         ))}
-
-        {posts ? 
-            posts.map((post) => { 
-            return ( <div key={post._id}>
-                <h2>Title: {post.title}</h2>
-                <h2>Description: {post.description}</h2>
-                <h2>Price: {post.price}</h2>
-                <h3>Location: {post.location}</h3>
-                <h3>Delivery: {post.willDeliver}</h3>
-            </div> )
-        }) : null}
-            
         </>
-       
         )
-
 }
 
 
@@ -93,3 +78,15 @@ export default function AllPosts() {
 //     'Authorization': `Bearer ${token}`
 //   },
 // });
+
+
+// {posts ? 
+//   posts.map((post) => { 
+//   return ( <div key={post._id}>
+//       <h2>Title: {post.title}</h2>
+//       <h2>Description: {post.description}</h2>
+//       <h2>Price: {post.price}</h2>
+//       <h3>Location: {post.location}</h3>
+//       <h3>Delivery: {post.willDeliver}</h3>
+//   </div> )
+// }) : null}

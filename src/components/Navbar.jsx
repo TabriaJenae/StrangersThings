@@ -20,8 +20,9 @@ const Navbar=()=> {
                 <li>Welcome back!</li>
                 <li><Link to={'/posts'}>See Posts</Link></li>
                 <li><Link to={'/addpost'}>Add New Post</Link></li>
-                <li><Link onClick={logout} to='/Register'>Logout</Link></li> 
                 <li><Link to={'/author-messages/:postId'}> My Messages</Link></li>
+                <li><Link onClick={logout} to='/Register'>Logout</Link></li> 
+
 
              </ul>
             
