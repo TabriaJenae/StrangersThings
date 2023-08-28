@@ -116,10 +116,10 @@ export default function UserPosts() {
         return (
             <>
         <div className='all-posts-container'>
-      <h1>Strangers Things</h1>
+      <h1 className='brighttext'>Strangers Things</h1>
       <div>
         <label className='search-bar'>
-          Search
+          <div className='brighttext'>Search for item name below</div>
           <input
             type="text"
             placeholder=""
@@ -131,36 +131,19 @@ export default function UserPosts() {
         </div>
 
         {filteredPosts.map(post => (
-            <div key={post._id}>
+            <div key={post._id} className='item-card'>
                 <h2>{post.title}</h2>
                 <h2>{post.description}</h2>
                 <h2>{post.price}</h2>
                 <h3>{post.location}</h3>
                 <h4>{post.willDeliver}</h4>
+                <div>{post.isAuthor ? <button onClick={()=>deletePost(post._id)}>Delete Post</button> : null}</div>
+                <div>{post.isAuthor ? <button onClick={()=>messageForm(post._id)}>See Messages About Item</button> : null}</div>
                 {auth && !isAuthor(post) ? (
             <MessageForm postId={post._id} onMessageSubmit={handleMessageSubmit} />
             ) : null}
             </div> 
         ))}
-
-        {posts ? 
-        posts.map((post) => { 
-            return ( <div key={post._id}>
-                <h2>Title: {post.title}</h2>
-                <h2>Description: {post.description}</h2>
-                <h2>Price: {post.price}</h2>
-                <h3>Location: {post.location}</h3>
-                <h4>Delivery: {post.willDeliver}</h4>
-                <li>{post.isAuthor ? <button onClick={()=>deletePost(post._id)}>Delete Post</button> : null}</li>
-                <li>{post.isAuthor ? <button onClick={()=>messageForm(post._id)}>See Messages About Item</button> : null}</li>
-                {isAuthor(post) ? (
-                <div>
-                <button onClick={() => seeMessages(post._id)}>See Messages</button>
-                </div>
-                ) : null}
-
-            </div> )
-        }) : null}
             </>
         )
 
@@ -168,3 +151,22 @@ export default function UserPosts() {
 
 
 
+
+// {posts ? 
+//   posts.map((post) => { 
+//       return ( <div key={post._id} className='item-card'>
+//           <h2>Title: {post.title}</h2>
+//           <h2>Description: {post.description}</h2>
+//           <h2>Price: {post.price}</h2>
+//           <h3>Location: {post.location}</h3>
+//           <h4>Delivery: {post.willDeliver}</h4>
+//           <div>{post.isAuthor ? <button onClick={()=>deletePost(post._id)}>Delete Post</button> : null}</div>
+//           <div>{post.isAuthor ? <button onClick={()=>messageForm(post._id)}>See Messages About Item</button> : null}</div>
+//           {isAuthor(post) ? (
+//           <div>
+//           <button onClick={() => seeMessages(post._id)}>See Messages</button>
+//           </div>
+//           ) : null}
+
+//       </div> )
+//   }) : null}
