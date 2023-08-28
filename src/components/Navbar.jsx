@@ -21,6 +21,7 @@ const Navbar=()=> {
                 <li><Link to={'/posts'}>See Posts</Link></li>
                 <li><Link to={'/addpost'}>Add New Post</Link></li>
                 <li><Link onClick={logout} to='/Register'>Logout</Link></li> 
+                <li><Link to={'/author-messages/:postId'}> My Messages</Link></li>
 
              </ul>
             
